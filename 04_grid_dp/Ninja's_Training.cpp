@@ -41,7 +41,7 @@ int ninjaTraining(int n, vector<vector<int>>& points) {
         for(int last{}; last < 4; ++last) {
             for(int task{}; task < 3; ++task) {
                 if(task != last) {
-                    dp[day][task] = max(dp[day][last], points[day][task] + dp[day-1][task]);
+                    dp[day][last] = max(dp[day][last], points[day][task] + dp[day-1][task]);
                 }
             }
         }
