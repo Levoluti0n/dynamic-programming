@@ -24,8 +24,8 @@ bool subsetSumEqualsK(const std::vector<int>& nums, int K) {
     int n = nums.size();
     std::vector<std::vector<int>> dp(
         n, std::vector<int>(K + 1, -1));
-        
-    return solve(n - 1, K, nums, dp);
+
+    return solve(n - 1, K, nums,  dp);
 }
 
 // Tabulation 2D
