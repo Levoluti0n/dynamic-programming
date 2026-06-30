@@ -16,7 +16,7 @@
 int solve(int i, int k, std::vector<int>& nums, std::vector<std::vector<int>>& dp) {
     if(i == 0) {
         if(k == 0 && nums[i] == 0) return 2;
-        if(k == 0 && k == nums[i]) return 1;
+        if(k == 0 || k == nums[i]) return 1;
         return 0;
     }
 
