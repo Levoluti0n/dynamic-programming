@@ -30,7 +30,7 @@ int coinChange(std::vector<int>& nums, int amount) {
     int n = nums.size();
     std::vector<std::vector<int>> dp(n, std::vector<int>(amount + 1));
 
-    for(int t{}; t <= amount; ++t) {
+    for(int t{nums[0]}; t <= amount; ++t) {
         if(t % nums[0] == 0) dp[0][t] = t / nums[0];
         else dp[0][t] = INF;
     }
