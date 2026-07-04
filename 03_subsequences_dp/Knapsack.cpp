@@ -20,23 +20,31 @@ int knapsack(std::vector<int>& weights, std::vector<int>& values, int lb) {
 
 // Tabulation
 
-int knapsack(std::vector<int>& weights, std::vector<int>& values, int lb) {
-    int w = values.size();
+int knapsack(int W,
+             std::vector<int>& wt,
+             std::vector<int>& val) {
+    int n = wt.size();
 
-    std::vector<std::vector<int>> dp(w+1, std::vector<int>(lb+1, 0));
+    std::vector<std::vector<int>>
+        dp(n, std::vector<int>(W + 1, 0));
 
-    for(int weight{weights[0]}; weight <= lb; ++weight) dp[0][weight] = values[0];
+    for (int w = wt[0]; w <= W; ++w)
+        dp[0][w] = val[0];
 
-    for(int i{1}; i <= w; ++i) {
-        for(int curr{}; curr <= lb; ++curr) {
-            dp[i][curr] = dp[i-1][curr];
-            
-            if(curr >= weights[i-1]) {
-                dp[i][curr] = std::max(dp[i-1][curr], values[i-1] + dp[i-1][curr-weights[i-1]]);
-            }
+    for (int i = 1; i < n; ++i) {
+        for (int w = 0; w <= W; ++w) {
+            int notTake = dp[i - 1][w];
+
+            int take = 0;
+            if (wt[i] <= w)
+                take = val[i] +
+                       dp[i - 1][w - wt[i]];
+
+            dp[i][w] = std::max(take, notTake);
         }
     }
-    return dp[w][lb];
+
+    return dp[n - 1][W];
 }
 
 // Tabulation Space Optimized
@@ -51,5 +59,6 @@ int knapsack(std::vector<int>& weights, std::vector<int>& values, int lb) {
             dp[j] = std::max(dp[j], values[i] + dp[j-weights[i]]);
         }
     }
+    
     return dp[lb];
 }
