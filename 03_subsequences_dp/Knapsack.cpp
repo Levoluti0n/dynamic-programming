@@ -8,7 +8,7 @@ int solve(int i, int lb, std::vector<int>& values, std::vector<int>& weights, st
         return 0;
     }
     if(dp[i][lb] != -1) return dp[i][lb];
-    return dp[i][lb] = std::max(solve(i-1, lb, values, weights, dp), (weights[i] <= lb ? solve(i-1, lb-weights[i], values, weights, dp) : 0));
+    return dp[i][lb] = std::max(solve(i-1, lb, values, weights, dp), (weights[i] <= lb ? values[i] + solve(i-1, lb-weights[i], values, weights, dp) : 0));
 }
 
 int knapsack(std::vector<int>& weights, std::vector<int>& values, int lb) {
@@ -59,6 +59,6 @@ int knapsack(std::vector<int>& weights, std::vector<int>& values, int lb) {
             dp[j] = std::max(dp[j], values[i] + dp[j-weights[i]]);
         }
     }
-    
+
     return dp[lb];
 }

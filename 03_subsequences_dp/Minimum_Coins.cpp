@@ -21,15 +21,16 @@ int coinChange(std::vector<int>& nums, int amount) {
 
     int ans = solve(n-1, amount, nums, dp);
     
-    return (ans >= INF) ? -1 : ans;;
+    return (ans >= INF) ? -1 : ans;
 }
 
 // Tabulation
 
 int coinChange(std::vector<int>& nums, int amount) {
     int n = nums.size();
-    std::vector<std::vector<int>> dp(n, std::vector<int>(amount + 1));
+    std::vector<std::vector<int>> dp(n, std::vector<int>(amount + 1, INF));
 
+    dp[0][0] = 0;
     for(int t{nums[0]}; t <= amount; ++t) {
         if(t % nums[0] == 0) dp[0][t] = t / nums[0];
         else dp[0][t] = INF;

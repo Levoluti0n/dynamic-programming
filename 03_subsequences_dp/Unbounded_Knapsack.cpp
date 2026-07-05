@@ -29,7 +29,7 @@ int unbounded_knapsack(std::vector<int>& wt, std::vector<int>& nums, int lb) {
     int n = nums.size();
     std::vector<std::vector<int>> dp(n, std::vector<int>(lb+1));
 
-    for(int w{}; w <= lb; ++w) dp[0][w] = ((int)(w/wt[0])) * nums[0];
+    for(int w{wt[0]}; w <= lb; ++w) dp[0][w] = ((int)(w/wt[0])) * nums[0];
 
     for(int i{1}; i < n; ++i) {
         for(int w{}; w <= lb; ++w) {
@@ -52,7 +52,7 @@ int unbounded_knapsack(std::vector<int>& wt,
 
     std::vector<int> dp(W + 1, 0);
 
-    for (int w = 0; w <= W; ++w) {
+    for (int w{wt[0]}; w <= W; ++w) {
         dp[w] = (w / wt[0]) * val[0];
     }
 
