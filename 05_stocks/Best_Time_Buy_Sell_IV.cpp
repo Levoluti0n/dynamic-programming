@@ -77,3 +77,28 @@ public:
         return dp[1][k];
     }
 };
+
+// Tabulation 1D
+
+class Solution {
+public:
+    int maxProfit(int k, std::vector<int>& prices) {
+        int n = prices.size();
+        int t = k * 2;
+        std::vector<int> dp(k*2+1);
+
+        for(int i{n-1}; i >= 0; --i) {
+            for(int j{}; j < t; ++j) {
+                int p{};
+                if(j & 1) {
+                    p = std::max(dp[j+1] + prices[i], dp[j]);
+                } else {
+                    p = std::max(dp[j+1] - prices[i], dp[j]);
+                }
+                dp[j] = p;
+            }
+        }
+
+        return dp[0];
+    }
+};
